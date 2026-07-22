@@ -1,0 +1,16 @@
+{
+  "configuracoes": {
+    "avisoGlobal": "",
+    "expediente": { "ativo": true, "inicio": "08:00", "fim": "17:00", "dias": [1, 2, 3, 4, 5] }
+  },
+  "opcoes": [
+    {
+      "id": "informacoes",
+      "titulo_menu": "Informações sobre matrículas",
+      "texto_resposta": "Para informações sobre matrículas, procure a unidade escolar ou a Secretaria Municipal de Educação.",
+      "anexo": "",
+      "ativo": true,
+      "cliques": 0
+    }
+  ]
+}

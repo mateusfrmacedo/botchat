@@ -1,0 +1,51 @@
+{
+  "name": "botchat",
+  "version": "1.0.0",
+  "description": "BotChat",
+  "main": "main.js",
+  "scripts": {
+    "dev": "electron .",
+    "dist:win": "electron-builder --win nsis --x64",
+    "dist:mac": "electron-builder --mac dmg"
+  },
+  "build": {
+    "appId": "br.botchat.app",
+    "productName": "BotChat",
+    "icon": "build/icon.png",
+    "files": [
+      "**/*",
+      "!data/**",
+      "!node_modules/.cache/**"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.productivity"
+    }
+  },
+  "dependencies": {
+    "express": "^4.22.2",
+    "qrcode": "^1.5.4",
+    "whatsapp-web.js": "^1.27.0"
+  },
+  "devDependencies": {
+    "electron": "^35.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "allowScripts": {
+    "electron@35.7.5": true,
+    "electron-winstaller@5.4.0": true,
+    "puppeteer@24.38.0": true
+  }
+}
