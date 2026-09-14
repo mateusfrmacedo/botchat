@@ -20,6 +20,15 @@ Aplicativo desktop local para atendimento automatizado no WhatsApp. O bot e o pa
 - Uma conta de WhatsApp exclusiva para o bot.
 - Internet ativa no computador que executará o aplicativo.
 
+## Baixar o aplicativo
+
+Os instaladores prontos ficam na página de [Releases](https://github.com/mateusfrmacedo/botchat/releases):
+
+- Windows: baixe e execute o arquivo `.exe`.
+- macOS: baixe o arquivo `.dmg`, abra-o e arraste o BotChat para a pasta Aplicativos.
+
+Os instaladores são gerados para cada nova versão. Caso o macOS ou o Windows mostre um aviso de segurança, confirme que o arquivo foi baixado desta página oficial antes de prosseguir.
+
 ## Executar pelo código — macOS e Windows
 
 1. Baixe ou copie a pasta do projeto para o computador.

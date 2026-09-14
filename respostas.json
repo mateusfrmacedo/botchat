@@ -1,18 +1,7 @@
 {
   "configuracoes": {
     "avisoGlobal": "",
-    "expediente": {
-      "ativo": false,
-      "inicio": "08:00",
-      "fim": "17:00",
-      "dias": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
-    }
+    "expediente": { "ativo": true, "inicio": "08:00", "fim": "17:00", "dias": [1, 2, 3, 4, 5] }
   },
   "opcoes": [
     {
