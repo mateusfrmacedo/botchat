@@ -16,8 +16,25 @@ permissions:
 
 jobs:
   macos:
-    name: macOS
+    name: macOS (Apple Silicon)
     runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run dist:mac
+      - name: Anexar instalador ao release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.release_tag || github.ref_name }}
+        run: gh release upload "$RELEASE_TAG" dist/*.dmg --clobber
+
+  macos_intel:
+    name: macOS (Intel)
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
