@@ -25,9 +25,19 @@ Aplicativo desktop local para atendimento automatizado no WhatsApp. O bot e o pa
 Os instaladores prontos ficam na página de [Releases](https://github.com/mateusfrmacedo/botchat/releases):
 
 - Windows: baixe e execute o arquivo `.exe`.
-- macOS: baixe o arquivo `.dmg`, abra-o e arraste o BotChat para a pasta Aplicativos.
+- macOS Apple Silicon (M1, M2, M3 ou M4): baixe o arquivo `.dmg` com `arm64` no nome, abra-o e arraste o BotChat para a pasta Aplicativos.
 
 Os instaladores são gerados para cada nova versão. Caso o macOS ou o Windows mostre um aviso de segurança, confirme que o arquivo foi baixado desta página oficial antes de prosseguir.
+
+### Primeiro uso no macOS
+
+As versões distribuídas sem assinatura Apple podem ser bloqueadas pelo Gatekeeper com a mensagem “BotChat está danificado”. Isso não indica incompatibilidade com Apple Silicon. Depois de arrastar o aplicativo para Aplicativos, abra o Terminal e execute uma única vez:
+
+```bash
+xattr -rd com.apple.quarantine "/Applications/BotChat.app"
+```
+
+Em seguida, abra o BotChat normalmente. O comando remove o bloqueio apenas deste aplicativo instalado.
 
 ## Executar pelo código — macOS e Windows
 
