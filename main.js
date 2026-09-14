@@ -143,7 +143,7 @@ async function controlarBot(ativar) {
   estado = { ...estado, conexao:'Iniciando', detalhe:'Gerando novo QR Code...', qrCode:null }; emit();
   await iniciarBot(); return estado;
 }
-function criarJanela() { janela = new BrowserWindow({ width:1100,height:780,minWidth:780,minHeight:580,icon:path.join(__dirname,'build','icon.png'),webPreferences:{preload:path.join(__dirname,'preload.js'),contextIsolation:true,nodeIntegration:false} }); janela.loadFile(path.join(__dirname,'public','index.html')); }
+function criarJanela() { janela = new BrowserWindow({ width:1100,height:780,minWidth:780,minHeight:580,webPreferences:{preload:path.join(__dirname,'preload.js'),contextIsolation:true,nodeIntegration:false} }); janela.loadFile(path.join(__dirname,'public','index.html')); }
 function normalizarNumero(numero) { let n=String(numero||'').replace(/\D/g,''); if(n.length===10||n.length===11)n=`55${n}`; if(n.length<10||n.length>15)throw Error(`Número inválido: ${numero}`); return `${n}@c.us`; }
 async function enviarComunicado({ numeros, mensagem, consentimento }) { if(!consentimento)throw Error('Confirme que todos os contatos autorizaram o recebimento.'); if(estado.conexao!=='Conectado'||!bot)throw Error('Conecte o WhatsApp antes de enviar.'); const lista=[...new Set(String(numeros||'').split(/[\n,;]+/).map(x=>x.trim()).filter(Boolean))]; if(!lista.length)throw Error('Informe ao menos um número.'); if(lista.length>30)throw Error('Limite de 30 contatos por envio.'); const texto=String(mensagem||'').trim(); if(!texto)throw Error('Digite a mensagem.'); let enviados=0, falhas=[]; for(const numero of lista){try{const destino=normalizarNumero(numero);await bot.sendMessage(destino,texto);await pausarComunicado(destino);enviados++;log(`Comunicado enviado: ${enviados}/${lista.length}.`)}catch(e){const erro=e.message||String(e);falhas.push({numero,erro});log(`Falha ao enviar comunicado para ${numero}: ${erro}`)}if(enviados+falhas.length<lista.length)await new Promise(resolve=>setTimeout(resolve,2000));}return {enviados,falhas}; }
 ipcMain.handle('app:get-state', () => ({ dados:lerConfig(), estado, caminho:arquivoConfig }));
@@ -161,5 +161,5 @@ ipcMain.handle('bot:reconnect', () => reiniciarBot('Reconexão solicitada.', fal
 ipcMain.handle('bot:toggle', (_, ativar) => controlarBot(Boolean(ativar)));
 ipcMain.handle('events:clear', () => { estado.eventos = []; emitir(); });
 ipcMain.handle('broadcast:send', (_, dados) => enviarComunicado(dados));
-app.whenReady().then(()=>{ arquivoConfig=path.join(app.getPath('userData'),'config.json'); app.dock?.setIcon(path.join(__dirname,'build','icon.png')); garantirConfig(); criarJanela(); iniciarBot(); });
+app.whenReady().then(()=>{ arquivoConfig=path.join(app.getPath('userData'),'config.json'); garantirConfig(); criarJanela(); iniciarBot(); });
 app.on('window-all-closed',()=>{if(process.platform!=='darwin')app.quit();}); app.on('before-quit',()=>{try{bot?.destroy();}catch(_){}});
