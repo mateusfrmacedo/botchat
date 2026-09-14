@@ -26,6 +26,7 @@ Os instaladores prontos ficam na página de [Releases](https://github.com/mateus
 
 - Windows: baixe e execute o arquivo `.exe`.
 - macOS Apple Silicon (M1, M2, M3 ou M4): baixe o arquivo `.dmg` com `arm64` no nome, abra-o e arraste o BotChat para a pasta Aplicativos.
+- macOS Intel: baixe o arquivo `.dmg` com `x64` no nome, abra-o e arraste o BotChat para a pasta Aplicativos.
 
 Os instaladores são gerados para cada nova versão. Caso o macOS ou o Windows mostre um aviso de segurança, confirme que o arquivo foi baixado desta página oficial antes de prosseguir.
 

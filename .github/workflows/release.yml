@@ -42,7 +42,12 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npm run dist:mac
+      - run: npm run dist:mac -- --x64
+      - name: Identificar instalador Intel
+        run: |
+          for file in dist/*.dmg; do
+            mv "$file" "${file%.dmg}-x64.dmg"
+          done
       - name: Anexar instalador ao release
         env:
           GH_TOKEN: ${{ github.token }}
